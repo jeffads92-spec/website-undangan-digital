@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // 4. Copy template files
     copy(TEMPLATES_PATH . 'main.php', $website_path . 'index.php');
-    copy('assets/templates/admin-template.php', $website_path . 'admin/index.php');
+    copy('admin.php', $website_path . 'admin/index.php');
     
     // 5. Create website configuration
     $config_content = "<?php\n";
