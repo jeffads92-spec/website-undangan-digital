@@ -62,13 +62,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // 5. Create website configuration
     $config_content = "<?php\n";
+    // Include config utama dari root (naik 2 level: sites/folder/config.php -> root/config.php)
+    $config_content .= "require_once '../../config.php';\n\n"; 
     $config_content .= "define('WEBSITE_ID', {$customer_id});\n";
     $config_content .= "define('WEBSITE_FOLDER', '{$order_data['website_folder']}');\n";
-    $config_content .= "define('WEDDING_DATE', '{$order_data['wedding_date']}');\n";
-    $config_content .= "define('GROOM_NAME', '{$order_data['groom_name']}');\n";
-    $config_content .= "define('BRIDE_NAME', '{$order_data['bride_name']}');\n";
-    $config_content .= "define('LOCATION_NAME', '{$order_data['location_name']}');\n";
-    $config_content .= "define('LOCATION_ADDRESS', '{$order_data['location_address']}');\n";
+    // ... sisa define lainnya biarkan sama ...
     $config_content .= "?>";
     
     file_put_contents($website_path . 'config.php', $config_content);
