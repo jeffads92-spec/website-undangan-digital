@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     mkdir($website_path . 'data/', 0755, true);
     
     // 4. Copy template files
-    copy(TEMPLATES_PATH . 'wedding-template.html', $website_path . 'index.php');
+    copy(TEMPLATES_PATH . 'main.php', $website_path . 'index.php');
     copy('assets/templates/admin-template.php', $website_path . 'admin/index.php');
     
     // 5. Create website configuration
