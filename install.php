@@ -68,6 +68,15 @@ try {
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (website_id) REFERENCES customers(id) ON DELETE CASCADE
         )",
+        "music" => "CREATE TABLE IF NOT EXISTS music (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        website_id INT,
+        song_title VARCHAR(100),
+        artist VARCHAR(100),
+        file_path VARCHAR(255),
+        is_active BOOLEAN DEFAULT 1,
+        FOREIGN KEY (website_id) REFERENCES customers(id) ON DELETE CASCADE
+        )",
         "website_settings" => "CREATE TABLE IF NOT EXISTS website_settings (
             id INT PRIMARY KEY AUTO_INCREMENT,
             website_id INT,
