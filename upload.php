@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         
         // Update website HTML to use new image
-        updateWebsiteImage($customer['website_folder'], $section);
+        // updateWebsiteImage($customer['website_folder'], $section);
         
         echo json_encode(['success' => true, 'message' => 'Section uploaded!']);
         exit;
