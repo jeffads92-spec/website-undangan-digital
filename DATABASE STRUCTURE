@@ -1,0 +1,75 @@
+-- 1. TABEL CUSTOMERS
+CREATE TABLE customers (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    website_folder VARCHAR(100) UNIQUE,
+    customer_name VARCHAR(100),
+    email VARCHAR(100),
+    phone VARCHAR(20),
+    groom_name VARCHAR(100),
+    bride_name VARCHAR(100),
+    wedding_date DATETIME,
+    location_name VARCHAR(200),
+    location_address TEXT,
+    location_lat DECIMAL(10,8),
+    location_lng DECIMAL(11,8),
+    package_type ENUM('basic','premium','platinum'),
+    payment_status ENUM('pending','paid','expired'),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    password_hash VARCHAR(255),
+    admin_token VARCHAR(100)
+);
+
+-- 2. TABEL RSVP
+CREATE TABLE rsvp (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    website_id INT,
+    guest_name VARCHAR(100),
+    email VARCHAR(100),
+    attendance ENUM('yes','no','maybe'),
+    guest_count INT DEFAULT 1,
+    message TEXT,
+    submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (website_id) REFERENCES customers(id) ON DELETE CASCADE
+);
+
+-- 3. TABEL GUESTBOOK
+CREATE TABLE guestbook (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    website_id INT,
+    author_name VARCHAR(100),
+    message TEXT,
+    approved BOOLEAN DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (website_id) REFERENCES customers(id) ON DELETE CASCADE
+);
+
+-- 4. TABEL GALLERY
+CREATE TABLE gallery (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    website_id INT,
+    image_path VARCHAR(255),
+    caption VARCHAR(200),
+    display_order INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (website_id) REFERENCES customers(id) ON DELETE CASCADE
+);
+
+-- 5. TABEL MUSIC
+CREATE TABLE music (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    website_id INT,
+    song_title VARCHAR(100),
+    artist VARCHAR(100),
+    file_path VARCHAR(255),
+    is_active BOOLEAN DEFAULT 1,
+    FOREIGN KEY (website_id) REFERENCES customers(id) ON DELETE CASCADE
+);
+
+-- 6. TABEL SETTINGS
+CREATE TABLE website_settings (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    website_id INT,
+    setting_key VARCHAR(50),
+    setting_value TEXT,
+    FOREIGN KEY (website_id) REFERENCES customers(id) ON DELETE CASCADE
+);
